@@ -3,24 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- SEO + Profesyonel -->
   <title>Safa Şentürk | Android Developer Portfolio</title>
   <meta name="description" content="Computer Engineering student focused on Android development with Kotlin and Jetpack Compose." />
   <meta name="author" content="Safa Şentürk" />
-
-  <!-- Font (daha modern görünüm ama sade) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --bg: #0f172a;
       --card: #111827;
-      --soft: #1f2937;
       --text: #e5e7eb;
       --muted: #94a3b8;
       --accent: #38bdf8;
-      --accent-2: #22c55e;
       --border: rgba(255,255,255,0.08);
     }
 
@@ -35,7 +29,7 @@
       background: linear-gradient(180deg, #0b1220 0%, var(--bg) 100%);
       color: var(--text);
       line-height: 1.6;
-      padding: 20px;
+      padding: 24px;
     }
 
     a {
@@ -45,34 +39,112 @@
 
     .container {
       max-width: 900px;
-      margin: auto;
+      margin: 0 auto;
     }
 
     .card {
       background: var(--card);
-      padding: 20px;
-      border-radius: 12px;
       border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
       margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 34px;
+      margin-bottom: 8px;
     }
 
     h2 {
-      margin-bottom: 10px;
+      font-size: 22px;
+      margin-bottom: 12px;
       color: var(--accent);
     }
 
     p {
       color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: var(--text);
+      font-size: 18px;
+      margin-bottom: 12px;
     }
 
     .links a {
-      margin-right: 15px;
+      display: inline-block;
+      margin-right: 16px;
       font-weight: 600;
+    }
+
+    .project-title {
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    li {
+      margin-bottom: 8px;
     }
   </style>
 </head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Safa Şentürk</h1>
+      <div class="subtitle">Computer Engineering Student | Android Developer</div>
+      <p>Trabzon, Türkiye</p>
+      <div class="links">
+        <a href="https://github.com/SafaSenturk" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/safa-senturk" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>About Me</h2>
+      <p>
+        Computer Engineering student with a strong interest in mobile application development.
+        I build Android applications using Kotlin and Jetpack Compose, focusing on clean UI and maintainable code.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Education</h2>
+      <p><strong>Inönü University</strong></p>
+      <p>Computer Engineering</p>
+      <p>2024 – Present | GPA: 3.22 / 4.00</p>
+    </div>
+
+    <div class="card">
+      <h2>Technical Skills</h2>
+      <p>Kotlin, Python, Java</p>
+      <p>Android, Jetpack Compose</p>
+      <p>Git, GitHub, Android Studio</p>
+    </div>
+
+    <div class="card">
+      <h2>Project</h2>
+      <div class="project-title">Gamedle – Android Game Application</div>
+      <p>
+        <a href="https://github.com/SafaSenturk/gamedle" target="_blank">
+          View Project on GitHub
+        </a>
+      </p>
+      <ul>
+        <li>Developed a mobile game using Kotlin and Jetpack Compose</li>
+        <li>Designed modern and responsive user interfaces</li>
+        <li>Implemented interactive gameplay mechanics</li>
+        <li>Built clean and maintainable architecture</li>
+        <li>Integrated multiple game modes</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
