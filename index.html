@@ -380,6 +380,32 @@
     .footer-links a { font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* ── Lang toggle ── */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px;
+    }
+    .lang-btn {
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: .2s;
+    }
+    .lang-btn.active {
+      background: var(--blue);
+      color: #000;
+    }
+
     /* ── Reveal animation ── */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.show { opacity: 1; transform: translateY(0); }
@@ -409,10 +435,14 @@
       <div class="nav-inner">
         <div class="brand">Safa<em>Şentürk</em></div>
         <div class="nav-links">
-          <a href="#services" class="hide-mobile">Services</a>
-          <a href="#projects" class="hide-mobile">Projects</a>
-          <a href="#skills" class="hide-mobile">Skills</a>
-          <a href="#contact" class="nav-cta">Let's Talk</a>
+          <a href="#services" class="hide-mobile" data-en="Services" data-tr="Hizmetler">Services</a>
+          <a href="#projects" class="hide-mobile" data-en="Projects" data-tr="Projeler">Projects</a>
+          <a href="#skills" class="hide-mobile" data-en="Skills" data-tr="Beceriler">Skills</a>
+          <a href="#contact" class="nav-cta" data-en="Let's Talk" data-tr="İletişim">Let's Talk</a>
+          <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('tr')">TR</button>
+          </div>
         </div>
       </div>
     </nav>
@@ -421,25 +451,25 @@
     <section class="hero">
       <div class="availability">
         <span class="dot"></span>
-        Available for freelance work
+        <span data-en="Available for freelance work" data-tr="Freelance çalışmaya açığım">Available for freelance work</span>
       </div>
 
       <h1>
-        Building software<br />
-        <span class="line2">that actually works.</span>
+        <span data-en="Building software" data-tr="Yazılım geliştiriyorum,">Building software</span><br />
+        <span class="line2" data-en="that actually works." data-tr="gerçekten çalışan.">that actually works.</span>
       </h1>
 
-      <p class="hero-sub">
+      <p class="hero-sub" data-en="I'm Safa, a software developer specializing in Android & Web development. I build clean, fast, and modern applications — from mobile apps to full-stack e-commerce platforms." data-tr="Merhaba, ben Safa. Android ve Web geliştirme konusunda uzmanlaşmış bir yazılım geliştiricisiyim. Mobil uygulamalardan tam kapsamlı e-ticaret platformlarına kadar modern, hızlı ve temiz uygulamalar inşa ediyorum.">
         I'm Safa, a software developer specializing in Android & Web development.
         I build clean, fast, and modern applications — from mobile apps to
         full-stack e-commerce platforms.
       </p>
 
       <div class="hero-btns">
-        <a href="#projects" class="btn btn-blue">
+        <a href="#projects" class="btn btn-blue" data-en="View My Work →" data-tr="Çalışmalarım →">
           View My Work →
         </a>
-        <a href="#contact" class="btn btn-ghost">
+        <a href="#contact" class="btn btn-ghost" data-en="Get in Touch" data-tr="İletişime Geç">
           Get in Touch
         </a>
         <a href="https://github.com/SafaSenturk" target="_blank" class="btn btn-ghost">
@@ -450,56 +480,56 @@
       <div class="hero-stats">
         <div class="stat-item">
           <strong>2+</strong>
-          <span>Years coding</span>
+          <span data-en="Years coding" data-tr="Yıl deneyim">Years coding</span>
         </div>
         <div class="stat-item">
           <strong>3+</strong>
-          <span>Projects shipped</span>
+          <span data-en="Projects shipped" data-tr="Tamamlanan proje">Projects shipped</span>
         </div>
         <div class="stat-item">
           <strong>2</strong>
-          <span>Platforms (Android + Web)</span>
+          <span data-en="Platforms (Android + Web)" data-tr="Platform (Android + Web)">Platforms (Android + Web)</span>
         </div>
         <div class="stat-item">
-          <strong>Fast</strong>
-          <span>Delivery</span>
+          <strong data-en="Fast" data-tr="Hızlı">Fast</strong>
+          <span data-en="Delivery" data-tr="Teslimat">Delivery</span>
         </div>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section id="services" class="reveal">
-      <div class="section-label">What I Do</div>
-      <h2>Services</h2>
-      <p class="section-desc">I turn your ideas into real, working products — on any platform.</p>
+      <div class="section-label" data-en="What I Do" data-tr="Ne Yapıyorum">What I Do</div>
+      <h2 data-en="Services" data-tr="Hizmetler">Services</h2>
+      <p class="section-desc" data-en="I turn your ideas into real, working products — on any platform." data-tr="Fikirlerinizi gerçek, çalışan ürünlere dönüştürüyorum — her platformda.">I turn your ideas into real, working products — on any platform.</p>
 
       <div class="grid-2">
         <div class="service-card">
           <div class="service-num">01</div>
           <div>
-            <h3>Android Development</h3>
-            <p>Native Android apps built with Kotlin and Jetpack Compose. Clean UI, smooth performance, modern architecture.</p>
+            <h3 data-en="Android Development" data-tr="Android Geliştirme">Android Development</h3>
+            <p data-en="Native Android apps built with Kotlin and Jetpack Compose. Clean UI, smooth performance, modern architecture." data-tr="Kotlin ve Jetpack Compose ile geliştirilen native Android uygulamaları. Temiz arayüz, akıcı performans, modern mimari.">Native Android apps built with Kotlin and Jetpack Compose. Clean UI, smooth performance, modern architecture.</p>
           </div>
         </div>
         <div class="service-card">
           <div class="service-num">02</div>
           <div>
-            <h3>Web Development</h3>
-            <p>Full-featured web apps with Next.js, React, and TypeScript. Responsive, fast, and production-ready.</p>
+            <h3 data-en="Web Development" data-tr="Web Geliştirme">Web Development</h3>
+            <p data-en="Full-featured web apps with Next.js, React, and TypeScript. Responsive, fast, and production-ready." data-tr="Next.js, React ve TypeScript ile tam kapsamlı web uygulamaları. Responsive, hızlı ve production'a hazır.">Full-featured web apps with Next.js, React, and TypeScript. Responsive, fast, and production-ready.</p>
           </div>
         </div>
         <div class="service-card">
           <div class="service-num">03</div>
           <div>
-            <h3>E-Commerce Solutions</h3>
-            <p>Multi-vendor storefronts, product pages, carts, checkouts — everything a modern online store needs.</p>
+            <h3 data-en="E-Commerce Solutions" data-tr="E-Ticaret Çözümleri">E-Commerce Solutions</h3>
+            <p data-en="Multi-vendor storefronts, product pages, carts, checkouts — everything a modern online store needs." data-tr="Çok satıcılı mağazalar, ürün sayfaları, sepet, ödeme — modern bir online mağazanın ihtiyaç duyduğu her şey.">Multi-vendor storefronts, product pages, carts, checkouts — everything a modern online store needs.</p>
           </div>
         </div>
         <div class="service-card">
           <div class="service-num">04</div>
           <div>
-            <h3>UI / UX Design</h3>
-            <p>Clean, intuitive interfaces designed with real users in mind. From wireframes to pixel-perfect implementation.</p>
+            <h3 data-en="UI / UX Design" data-tr="UI / UX Tasarım">UI / UX Design</h3>
+            <p data-en="Clean, intuitive interfaces designed with real users in mind. From wireframes to pixel-perfect implementation." data-tr="Gerçek kullanıcılar düşünülerek tasarlanmış temiz, sezgisel arayüzler. Wireframe'den piksel mükemmelliğine.">Clean, intuitive interfaces designed with real users in mind. From wireframes to pixel-perfect implementation.</p>
           </div>
         </div>
       </div>
@@ -507,58 +537,58 @@
 
     <!-- PROJECTS -->
     <section id="projects" class="reveal">
-      <div class="section-label">Portfolio</div>
-      <h2>Featured Projects</h2>
-      <p class="section-desc">A selection of things I've built recently.</p>
+      <div class="section-label" data-en="Portfolio" data-tr="Portföy">Portfolio</div>
+      <h2 data-en="Featured Projects" data-tr="Öne Çıkan Projeler">Featured Projects</h2>
+      <p class="section-desc" data-en="A selection of things I've built recently." data-tr="Son zamanlarda geliştirdiğim projelerden bir seçki.">A selection of things I've built recently.</p>
 
       <div class="grid-3">
         <div class="card">
           <div class="card-icon">🛒</div>
-          <h3>E-Commerce SaaS Platform</h3>
-          <p>A full multi-vendor e-commerce platform with product pages, cart, checkout, admin panel, and store profiles.</p>
+          <h3 data-en="E-Commerce SaaS Platform" data-tr="E-Ticaret SaaS Platformu">E-Commerce SaaS Platform</h3>
+          <p data-en="A full multi-vendor e-commerce platform with product pages, cart, checkout, admin panel, and store profiles." data-tr="Ürün sayfaları, sepet, ödeme, admin paneli ve mağaza profilleri içeren tam kapsamlı çok satıcılı e-ticaret platformu.">A full multi-vendor e-commerce platform with product pages, cart, checkout, admin panel, and store profiles.</p>
           <div class="project-tags">
             <span class="tag tag-blue">Next.js 15</span>
             <span class="tag tag-purple">TypeScript</span>
             <span class="tag tag-blue">TailwindCSS</span>
             <span class="tag tag-green">Live</span>
           </div>
-          <a href="https://ecommerce-saas-coral.vercel.app" target="_blank" class="card-link">View Demo →</a>
+          <a href="https://ecommerce-saas-coral.vercel.app" target="_blank" class="card-link" data-en="View Demo →" data-tr="Demoya Git →">View Demo →</a>
         </div>
 
         <div class="card">
           <div class="card-icon">🎮</div>
-          <h3>Gamedle</h3>
-          <p>A mobile game application developed with Kotlin and Jetpack Compose featuring multiple interactive game modes.</p>
+          <h3 data-en="Gamedle" data-tr="Gamedle">Gamedle</h3>
+          <p data-en="A mobile game application developed with Kotlin and Jetpack Compose featuring multiple interactive game modes." data-tr="Kotlin ve Jetpack Compose ile geliştirilen, birden fazla interaktif oyun modu içeren mobil oyun uygulaması.">A mobile game application developed with Kotlin and Jetpack Compose featuring multiple interactive game modes.</p>
           <div class="project-tags">
             <span class="tag tag-blue">Kotlin</span>
             <span class="tag tag-purple">Jetpack Compose</span>
             <span class="tag tag-blue">Android</span>
           </div>
-          <a href="https://github.com/SafaSenturk/gamedle" target="_blank" class="card-link">View on GitHub →</a>
+          <a href="https://github.com/SafaSenturk/gamedle" target="_blank" class="card-link" data-en="View on GitHub →" data-tr="GitHub'da Gör →">View on GitHub →</a>
         </div>
 
         <div class="card">
           <div class="card-icon">🚀</div>
-          <h3>More in Progress</h3>
-          <p>Currently working on new projects including a backend API and a mobile productivity app. Stay tuned.</p>
+          <h3 data-en="More in Progress" data-tr="Devam Eden Projeler">More in Progress</h3>
+          <p data-en="Currently working on new projects including a backend API and a mobile productivity app. Stay tuned." data-tr="Şu an backend API ve mobil verimlilik uygulaması dahil yeni projeler üzerinde çalışıyorum. Takipte kalın.">Currently working on new projects including a backend API and a mobile productivity app. Stay tuned.</p>
           <div class="project-tags">
             <span class="tag">NestJS</span>
             <span class="tag">PostgreSQL</span>
-            <span class="tag">Coming Soon</span>
+            <span class="tag" data-en="Coming Soon" data-tr="Yakında">Coming Soon</span>
           </div>
-          <a href="https://github.com/SafaSenturk" target="_blank" class="card-link">Follow on GitHub →</a>
+          <a href="https://github.com/SafaSenturk" target="_blank" class="card-link" data-en="Follow on GitHub →" data-tr="GitHub'da Takip Et →">Follow on GitHub →</a>
         </div>
       </div>
     </section>
 
     <!-- SKILLS -->
     <section id="skills" class="reveal">
-      <div class="section-label">Tech Stack</div>
-      <h2>Skills</h2>
-      <p class="section-desc">Technologies I work with regularly.</p>
+      <div class="section-label" data-en="Tech Stack" data-tr="Teknolojiler">Tech Stack</div>
+      <h2 data-en="Skills" data-tr="Beceriler">Skills</h2>
+      <p class="section-desc" data-en="Technologies I work with regularly." data-tr="Düzenli olarak çalıştığım teknolojiler.">Technologies I work with regularly.</p>
 
       <div class="skills-grid">
-        <div class="skill-category">Mobile</div>
+        <div class="skill-category" data-en="Mobile" data-tr="Mobil">Mobile</div>
         <div class="skill">Kotlin</div>
         <div class="skill">Jetpack Compose</div>
         <div class="skill">Android SDK</div>
@@ -571,7 +601,7 @@
         <div class="skill">TailwindCSS</div>
         <div class="skill">Framer Motion</div>
 
-        <div class="skill-category">Backend & Tools</div>
+        <div class="skill-category" data-en="Backend & Tools" data-tr="Backend & Araçlar">Backend & Tools</div>
         <div class="skill">Python</div>
         <div class="skill">Java</div>
         <div class="skill">Git</div>
@@ -582,25 +612,25 @@
 
     <!-- CONTACT -->
     <section id="contact" class="reveal">
-      <div class="section-label">Contact</div>
-      <h2>Let's work together.</h2>
-      <p class="section-desc">Have a project in mind? I'd love to hear about it.</p>
+      <div class="section-label" data-en="Contact" data-tr="İletişim">Contact</div>
+      <h2 data-en="Let's work together." data-tr="Birlikte çalışalım.">Let's work together.</h2>
+      <p class="section-desc" data-en="Have a project in mind? I'd love to hear about it." data-tr="Aklınızda bir proje mi var? Dinlemeyi çok isterim.">Have a project in mind? I'd love to hear about it.</p>
 
       <div class="contact-grid">
         <form class="contact-form" onsubmit="handleSubmit(event)">
           <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" placeholder="John Doe" required />
+            <label data-en="Your Name" data-tr="Adınız">Your Name</label>
+            <input type="text" data-placeholder-en="John Doe" data-placeholder-tr="Ad Soyad" placeholder="John Doe" required />
           </div>
           <div class="form-group">
             <label>Email</label>
             <input type="email" placeholder="john@example.com" required />
           </div>
           <div class="form-group">
-            <label>Message</label>
-            <textarea placeholder="Tell me about your project..."></textarea>
+            <label data-en="Message" data-tr="Mesaj">Message</label>
+            <textarea data-placeholder-en="Tell me about your project..." data-placeholder-tr="Projeniz hakkında bilgi verin..." placeholder="Tell me about your project..."></textarea>
           </div>
-          <button type="submit" class="btn btn-blue" style="align-self:flex-start">
+          <button type="submit" class="btn btn-blue" style="align-self:flex-start" data-en="Send Message →" data-tr="Mesaj Gönder →">
             Send Message →
           </button>
         </form>
@@ -630,7 +660,7 @@
           <div class="contact-item" style="cursor:default">
             <div class="contact-item-icon">📍</div>
             <div>
-              <div class="contact-item-label">Location</div>
+              <div class="contact-item-label" data-en="Location" data-tr="Konum">Location</div>
               <div class="contact-item-value">Trabzon, Türkiye</div>
             </div>
           </div>
@@ -657,14 +687,38 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => io.observe(el));
 
+    // Lang switch
+    let currentLang = 'en';
+
+    function setLang(lang) {
+      currentLang = lang;
+
+      // Toggle active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+      });
+
+      // Update all elements with data-en / data-tr
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+
+      // Update placeholders
+      document.querySelectorAll('[data-placeholder-en]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+      });
+    }
+
     // Form
     function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = "Message Sent ✓";
+      const msg = currentLang === 'tr' ? 'Mesaj Gönderildi ✓' : 'Message Sent ✓';
+      const orig = btn.getAttribute('data-' + currentLang);
+      btn.textContent = msg;
       btn.style.background = "#3fb950";
       setTimeout(() => {
-        btn.textContent = "Send Message →";
+        btn.textContent = orig;
         btn.style.background = "";
         e.target.reset();
       }, 3000);
