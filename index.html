@@ -618,18 +618,18 @@
       <p class="section-desc" data-en="Have a project in mind? I'd love to hear about it." data-tr="Aklınızda bir proje mi var? Dinlemeyi çok isterim.">Have a project in mind? I'd love to hear about it.</p>
 
       <div class="contact-grid">
-        <form class="contact-form" onsubmit="handleSubmit(event)">
+        <form class="contact-form" action="https://formspree.io/f/xeebvaep" method="POST">
           <div class="form-group">
             <label data-en="Your Name" data-tr="Adınız">Your Name</label>
-            <input type="text" data-placeholder-en="John Doe" data-placeholder-tr="Ad Soyad" placeholder="John Doe" required />
+            <input type="text" name="name" data-placeholder-en="John Doe" data-placeholder-tr="Ad Soyad" placeholder="John Doe" required />
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" placeholder="john@example.com" required />
+            <input type="email" name="email" placeholder="john@example.com" required />
           </div>
           <div class="form-group">
             <label data-en="Message" data-tr="Mesaj">Message</label>
-            <textarea data-placeholder-en="Tell me about your project..." data-placeholder-tr="Projeniz hakkında bilgi verin..." placeholder="Tell me about your project..."></textarea>
+            <textarea name="message" data-placeholder-en="Tell me about your project..." data-placeholder-tr="Projeniz hakkında bilgi verin..." placeholder="Tell me about your project..."></textarea>
           </div>
           <button type="submit" class="btn btn-blue" style="align-self:flex-start" data-en="Send Message →" data-tr="Mesaj Gönder →">
             Send Message →
