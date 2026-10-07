@@ -4,726 +4,1021 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Safa Şentürk — Software Developer</title>
-  <meta name="description" content="Safa Şentürk — Software developer specializing in Android & Web development. Available for freelance projects." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <meta name="description" content="Safa Şentürk — software developer building Android apps, web applications and games. Available for freelance projects." />
+  <meta name="theme-color" content="#0f0e0c" />
+  <meta property="og:title" content="Safa Şentürk — Software Developer" />
+  <meta property="og:description" content="Android apps, web applications and games — built to actually work." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add("js");</script>
   <style>
     :root {
-      --bg:       #060910;
-      --surface:  #0d1117;
-      --card:     rgba(13, 17, 23, 0.85);
-      --border:   rgba(255,255,255,0.07);
-      --text:     #f0f6fc;
-      --muted:    #8b949e;
-      --blue:     #58a6ff;
-      --purple:   #a371f7;
-      --green:    #3fb950;
-      --r:        16px;
+      --bg: #0f0e0c;
+      --surface: #171512;
+      --text: #ebe6da;
+      --muted: #979082;
+      --line: rgba(235, 230, 218, 0.13);
+      --accent: #c98a4b;
+      --gutter: clamp(16px, 4vw, 56px);
+      --serif: "Fraunces", Georgia, "Times New Roman", serif;
+      --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: "Inter", sans-serif;
       background: var(--bg);
       color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.65;
       overflow-x: hidden;
-      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; height: auto; }
+    ::selection { background: var(--accent); color: var(--bg); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .skip {
+      position: absolute; left: 16px; top: -60px; z-index: 200;
+      background: var(--text); color: var(--bg);
+      padding: 10px 14px; font-size: .9rem; text-decoration: none;
+    }
+    .skip:focus { top: 12px; }
+
+    .wrap { width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* ── Okuma ilerlemesi ── */
+    .progress {
+      position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 120;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: 0 50%;
     }
 
-    /* ── Noise texture overlay ── */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: .4;
+    /* ── Üst çubuk ── */
+    .top {
+      position: fixed; inset: 0 0 auto 0; z-index: 100;
+      transition: background .3s, border-color .3s;
+      border-bottom: 1px solid transparent;
     }
+    .top.scrolled {
+      background: rgba(15, 14, 12, 0.86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--line);
+    }
+    .top-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      height: 64px;
+    }
+    .brand {
+      font-family: var(--serif); font-size: 1.15rem; font-weight: 500;
+      letter-spacing: -.01em; text-decoration: none; white-space: nowrap;
+    }
+    .brand i { color: var(--accent); font-style: italic; }
+    .nav { display: flex; align-items: center; gap: clamp(14px, 2.4vw, 32px); }
+    .nav a {
+      font-family: var(--mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none; transition: color .2s;
+    }
+    .nav a:hover { color: var(--text); }
+    .lang { display: flex; border: 1px solid var(--line); }
+    .lang button {
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .06em;
+      background: none; border: 0; color: var(--muted);
+      padding: 6px 10px; cursor: pointer; transition: background .2s, color .2s;
+    }
+    .lang button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
 
-    /* ── Glow blobs ── */
-    .blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: .18;
-    }
-    .blob-1 { width: 600px; height: 600px; background: #1d4ed8; top: -200px; left: -200px; }
-    .blob-2 { width: 500px; height: 500px; background: #7c3aed; bottom: -150px; right: -150px; }
-
-    /* ── Layout ── */
-    .wrap {
-      width: min(1100px, calc(100% - 40px));
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ── Navbar ── */
-    nav {
-      position: sticky;
-      top: 16px;
-      z-index: 100;
-      padding-top: 16px;
-    }
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-      background: rgba(13,17,23,0.75);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    }
-    .brand { font-weight: 800; font-size: .95rem; letter-spacing: -.3px; }
-    .brand em { color: var(--blue); font-style: normal; }
-    .nav-links { display: flex; gap: 4px; }
-    .nav-links a {
+    /* ── Sahne göstergesi ── */
+    .scene-ind {
+      position: fixed; left: var(--gutter); bottom: 28px; z-index: 90;
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
       color: var(--muted);
-      text-decoration: none;
-      font-size: .88rem;
-      font-weight: 500;
-      padding: 7px 14px;
-      border-radius: 999px;
-      transition: .2s;
+      display: flex; align-items: center; gap: 12px;
+      pointer-events: none;
+      mix-blend-mode: difference;
     }
-    .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
-    .nav-cta {
-      background: var(--blue);
-      color: #000 !important;
-      font-weight: 700 !important;
+    .scene-ind b { color: var(--text); font-weight: 500; }
+    .scene-ind .bar { width: 44px; height: 1px; background: var(--line); position: relative; }
+    .scene-ind .bar span {
+      position: absolute; inset: 0; background: var(--accent);
+      transform: scaleX(.2); transform-origin: 0 50%; transition: transform .5s ease;
     }
-    .nav-cta:hover { background: #79c0ff !important; }
 
-    /* ── Hero ── */
-    .hero {
-      min-height: 92vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 0 60px;
+    /* ── Ortak sahne düzeni ── */
+    section { position: relative; padding: clamp(84px, 13vh, 150px) 0; }
+    .scene-head {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 24px;
+      align-items: end;
+      padding-bottom: 28px; margin-bottom: clamp(36px, 6vh, 72px);
+      border-bottom: 1px solid var(--line);
     }
-    .availability {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border: 1px solid rgba(63,185,80,.3);
-      background: rgba(63,185,80,.07);
-      border-radius: 999px;
-      font-size: .82rem;
-      font-weight: 600;
-      color: #7ee787;
-      margin-bottom: 28px;
-      width: fit-content;
-    }
-    .availability .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: blink 2s infinite;
-    }
-    @keyframes blink {
-      0%,100% { opacity: 1; }
-      50% { opacity: .35; }
-    }
-    .hero h1 {
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.02;
-      letter-spacing: -2.5px;
-      margin-bottom: 20px;
-    }
-    .hero h1 .line2 {
-      background: linear-gradient(90deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .hero-sub {
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 50ch;
-      margin-bottom: 36px;
-      line-height: 1.75;
-    }
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 60px; }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 22px;
-      border-radius: 12px;
-      font-size: .9rem;
-      font-weight: 700;
-      text-decoration: none;
-      border: 1px solid transparent;
-      transition: .2s;
-      cursor: pointer;
-    }
-    .btn-blue {
-      background: var(--blue);
-      color: #000;
-      box-shadow: 0 0 24px rgba(88,166,255,.25);
-    }
-    .btn-blue:hover { background: #79c0ff; transform: translateY(-2px); }
-    .btn-ghost {
-      color: var(--text);
-      border-color: var(--border);
-      background: rgba(255,255,255,0.04);
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
-
-    /* Hero stats row */
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-    .stat-item strong {
-      display: block;
-      font-size: 1.8rem;
-      font-weight: 900;
-      letter-spacing: -1px;
-      color: var(--text);
-    }
-    .stat-item span { font-size: .82rem; color: var(--muted); }
-
-    /* ── Section ── */
-    section { padding: 80px 0; }
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: .78rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 14px;
-    }
-    .section-label::before {
-      content: "";
-      width: 20px; height: 1px;
-      background: var(--blue);
+    .eyebrow {
+      font-family: var(--mono); font-size: .74rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent);
     }
     h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 900;
-      letter-spacing: -1.2px;
-      margin-bottom: 14px;
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(2.2rem, 5.4vw, 4.4rem);
+      line-height: 1.02; letter-spacing: -.03em;
     }
-    .section-desc { color: var(--muted); max-width: 52ch; margin-bottom: 40px; font-size: .95rem; }
+    h2 em { font-style: italic; color: var(--accent); }
+    .lead { color: var(--muted); max-width: 54ch; margin-top: 14px; }
 
-    /* ── Cards grid ── */
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    /* ── 01 Giriş ── */
+    .hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 120px 0 clamp(56px, 9vh, 96px);
+      overflow: hidden;
+    }
+    #orb {
+      position: absolute; z-index: 0;
+      right: max(-8vw, -120px); top: 50%;
+      width: min(68vw, 820px); aspect-ratio: 1;
+      transform: translateY(-52%);
+      pointer-events: none;
+    }
+    .hero .wrap { position: relative; z-index: 1; }
+    .status {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: clamp(20px, 4vh, 36px);
+    }
+    .status .dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 50% { opacity: .3; } }
+    h1 {
+      font-family: var(--serif); font-weight: 300;
+      font-size: clamp(3rem, 11.5vw, 10rem);
+      line-height: .92; letter-spacing: -.045em;
+      max-width: 12ch;
+    }
+    h1 span { display: block; }
+    h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+    .hero-foot {
+      display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 32px;
+      align-items: end;
+      margin-top: clamp(28px, 5vh, 56px); padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+    .hero-foot p { color: var(--muted); max-width: 52ch; font-size: 1.02rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+      padding: 14px 20px; text-decoration: none; cursor: pointer;
+      border: 1px solid var(--line); background: transparent; color: var(--text);
+      transition: background .25s, color .25s, border-color .25s;
+    }
+    .btn:hover { border-color: var(--text); }
+    .btn-solid { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .btn-solid:hover { background: var(--accent); border-color: var(--accent); }
+    .btn .arr { transition: transform .25s; }
+    .btn:hover .arr { transform: translateX(4px); }
 
+    /* ── 02 İşler: kartlar ── */
+    .cards { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 0 1px 1px 0; }
+    .cards li { display: flex; border: 1px solid var(--line); margin: 0 -1px -1px 0; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 24px;
-      backdrop-filter: blur(12px);
-      transition: border-color .25s, transform .25s;
+      flex: 1; display: flex; flex-direction: column; gap: 14px; text-align: left;
+      min-height: 300px; padding: clamp(22px, 2.6vw, 34px);
+      background: transparent; border: 0; color: inherit; font: inherit; cursor: pointer;
+      position: relative; transition: background .3s;
     }
-    .card:hover {
-      border-color: rgba(88,166,255,.25);
-      transform: translateY(-4px);
+    .card::after {
+      content: ""; position: absolute; inset: auto 0 0 0; height: 2px; background: var(--accent);
+      transform: scaleX(0); transform-origin: 0 50%; transition: transform .45s cubic-bezier(.2, .7, .2, 1);
     }
-    .card-icon {
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-      background: rgba(88,166,255,.1);
-      border: 1px solid rgba(88,166,255,.15);
-      margin-bottom: 16px;
+    .card:hover, .card:focus-visible { background: var(--surface); }
+    .card:hover::after, .card:focus-visible::after { transform: scaleX(1); }
+    .c-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .c-num {
+      font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 3.2rem; line-height: .9;
+      color: transparent; -webkit-text-stroke: 1px rgba(235, 230, 218, .34); transition: -webkit-text-stroke-color .3s;
     }
-    .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .card p { font-size: .88rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .card:hover .c-num, .card:focus-visible .c-num { -webkit-text-stroke-color: var(--accent); }
+    .c-type, .c-tech, .c-more {
+      font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    }
+    .c-type { text-align: right; padding-top: 6px; }
+    .c-title { font-family: var(--serif); font-size: clamp(1.45rem, 2.1vw, 1.85rem); line-height: 1.1; letter-spacing: -.02em; margin-top: auto; }
+    .c-desc { color: var(--muted); font-size: .95rem; line-height: 1.55; }
+    .c-foot { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .c-tech { text-transform: none; letter-spacing: .02em; }
+    .c-more { color: var(--text); white-space: nowrap; display: inline-flex; gap: 8px; }
+    .c-more .arr { transition: transform .25s; }
+    .card:hover .c-more .arr, .card:focus-visible .c-more .arr { transform: translateX(5px); }
 
-    /* Project card extras */
-    .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .tag {
-      font-size: .73rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
+    /* ── Ayrıntı paneli ── */
+    html.locked { overflow: hidden; }
+    dialog.panel {
+      position: fixed; inset: 0 0 0 auto; margin: 0; padding: 0;
+      width: min(700px, 100%); max-width: 100%; height: 100%; max-height: 100%;
+      border: 0; border-left: 1px solid var(--line);
+      background: var(--bg); color: var(--text); overflow: hidden;
     }
-    .tag-blue { border-color: rgba(88,166,255,.3); color: var(--blue); background: rgba(88,166,255,.07); }
-    .tag-purple { border-color: rgba(163,113,247,.3); color: var(--purple); background: rgba(163,113,247,.07); }
-    .tag-green { border-color: rgba(63,185,80,.3); color: #7ee787; background: rgba(63,185,80,.07); }
-    .card-link {
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--blue);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap .2s;
+    dialog.panel[open] { display: flex; flex-direction: column; animation: panelIn .5s cubic-bezier(.2, .7, .2, 1); }
+    dialog.panel::backdrop { background: rgba(6, 5, 4, .66); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); animation: fadeIn .35s ease; }
+    @keyframes panelIn { from { transform: translateX(48px); opacity: 0; } }
+    @keyframes fadeIn { from { opacity: 0; } }
+    .panel-bar {
+      flex: none; display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 14px clamp(16px, 4vw, 36px); border-bottom: 1px solid var(--line);
     }
-    .card-link:hover { gap: 10px; }
+    .panel-close {
+      font-family: var(--mono); font-size: .74rem; letter-spacing: .1em; text-transform: uppercase;
+      background: none; color: var(--text); border: 1px solid var(--line); padding: 11px 14px; cursor: pointer;
+      display: inline-flex; gap: 10px; transition: border-color .2s, color .2s;
+    }
+    .panel-close:hover { border-color: var(--accent); color: var(--accent); }
+    .panel-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: clamp(24px, 4vw, 44px) clamp(16px, 4vw, 36px) 64px; }
+    .detail h3 {
+      font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+      line-height: 1.05; letter-spacing: -.025em; margin: 12px 0 18px;
+    }
+    .detail > p { color: var(--muted); max-width: 58ch; }
+    .detail > p + p { margin-top: 12px; }
+    .detail figure { margin-top: 28px; }
+    .detail .chips { margin: 28px 0 0; }
+    .detail .link { margin-top: 30px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; }
+    .chips li {
+      font-family: var(--mono); font-size: .7rem; letter-spacing: .04em;
+      padding: 5px 9px; border: 1px solid var(--line); color: var(--text);
+    }
+    .link {
+      font-family: var(--mono); font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+      text-decoration: none; color: var(--text);
+      display: inline-flex; align-items: center; gap: 10px;
+      padding-bottom: 6px; border-bottom: 1px solid var(--accent);
+      transition: gap .25s, color .25s;
+    }
+    .link:hover { gap: 16px; color: var(--accent); }
+    .shots-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 28px; align-items: start; }
+    .shots-pair figure { margin-top: 0; }
+    .shot { border: 1px solid var(--line); background: var(--surface); padding: clamp(8px, 1.2vw, 12px); }
+    .shot img { width: 100%; }
+    .shot figcaption {
+      font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--muted); padding-top: 10px;
+    }
+    .spec { border: 1px solid var(--line); background: var(--surface); padding: 6px clamp(16px, 3vw, 26px); }
+    .spec dl { display: grid; grid-template-columns: auto 1fr; }
+    .spec dt, .spec dd { padding: 13px 0; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: .78rem; }
+    .spec dt { color: var(--muted); letter-spacing: .08em; text-transform: uppercase; padding-right: 28px; }
+    .spec dd { text-align: right; }
+    .spec dl > :nth-last-child(-n + 2) { border-bottom: 0; }
 
-    /* ── Services (about) ── */
-    .service-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      background: var(--card);
-      transition: border-color .25s, transform .25s;
+    /* ── 03 Hizmetler ── */
+    .services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+    .service {
+      padding: clamp(24px, 4vw, 44px) clamp(0px, 2vw, 28px) clamp(24px, 4vw, 44px) 0;
+      border-bottom: 1px solid var(--line);
     }
-    .service-card:hover { border-color: rgba(88,166,255,.25); transform: translateY(-3px); }
-    .service-num {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: rgba(88,166,255,.25);
-      line-height: 1;
-      flex-shrink: 0;
-      width: 36px;
+    .service:nth-child(odd) { border-right: 1px solid var(--line); }
+    .service:nth-child(even) { padding-left: clamp(16px, 3vw, 44px); padding-right: 0; }
+    .service .s-num { font-family: var(--mono); font-size: .74rem; color: var(--accent); letter-spacing: .1em; }
+    .service h3 {
+      font-family: var(--serif); font-weight: 400; font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+      letter-spacing: -.015em; margin: 12px 0 10px;
     }
-    .service-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 6px; }
-    .service-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .service p { color: var(--muted); max-width: 44ch; font-size: .97rem; }
 
-    /* ── Skills ── */
-    .skills-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    /* ── 04 Teknolojiler ── */
+    .stack { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 44px); }
+    .stack h3 {
+      font-family: var(--mono); font-size: .74rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); padding-bottom: 14px; border-bottom: 1px solid var(--line);
     }
-    .skill {
-      padding: 9px 16px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      font-size: .85rem;
-      font-weight: 500;
-      color: var(--text);
-      transition: .2s;
+    .stack ul { list-style: none; }
+    .stack li {
+      font-family: var(--serif); font-size: clamp(1.1rem, 1.7vw, 1.35rem);
+      padding: 11px 0; border-bottom: 1px solid var(--line);
     }
-    .skill:hover { border-color: rgba(88,166,255,.3); color: var(--blue); background: rgba(88,166,255,.05); }
-    .skill-category { color: var(--muted); font-size: .78rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin: 20px 0 10px; width: 100%; }
 
-    /* ── Contact ── */
-    .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-    .contact-form { display: flex; flex-direction: column; gap: 12px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: .82rem; font-weight: 600; color: var(--muted); }
-    .form-group input,
-    .form-group textarea {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 11px 14px;
-      color: var(--text);
-      font-family: inherit;
-      font-size: .9rem;
-      outline: none;
-      transition: border-color .2s;
+    /* ── 05 İletişim ── */
+    .contact h2 { font-size: clamp(2.6rem, 8.5vw, 7rem); max-width: 11ch; }
+    .contact-grid {
+      display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(28px, 6vw, 90px);
+      margin-top: clamp(36px, 6vh, 72px); padding-top: 32px; border-top: 1px solid var(--line);
     }
-    .form-group input:focus,
-    .form-group textarea:focus { border-color: rgba(88,166,255,.45); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .contact-info { display: flex; flex-direction: column; gap: 12px; }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 16px;
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      background: var(--card);
-      text-decoration: none;
-      color: var(--text);
-      transition: .2s;
+    form { display: grid; gap: 22px; }
+    label {
+      display: block; font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 6px;
     }
-    .contact-item:hover { border-color: rgba(88,166,255,.25); transform: translateX(4px); }
-    .contact-item-icon {
-      width: 38px; height: 38px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      font-size: 1rem;
-      background: rgba(88,166,255,.1);
-      flex-shrink: 0;
+    input, textarea {
+      width: 100%; background: transparent; color: var(--text);
+      border: 0; border-bottom: 1px solid var(--line); border-radius: 0;
+      font: inherit; font-size: 1rem; padding: 10px 0; outline: none;
+      transition: border-color .25s;
     }
-    .contact-item-label { font-size: .75rem; color: var(--muted); }
-    .contact-item-value { font-size: .9rem; font-weight: 600; }
+    input::placeholder, textarea::placeholder { color: rgba(151, 144, 130, .6); }
+    input:focus, textarea:focus { border-bottom-color: var(--accent); }
+    textarea { resize: vertical; min-height: 120px; }
+    form .btn { justify-self: start; }
+    .channels { list-style: none; border-top: 1px solid var(--line); }
+    .channels li { border-bottom: 1px solid var(--line); }
+    .channels a, .channels .static {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+      padding: 18px 0; text-decoration: none;
+    }
+    .channels .k {
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    }
+    .channels .v { font-family: var(--serif); font-size: 1.15rem; text-align: right; overflow-wrap: anywhere; transition: color .2s; }
+    .channels a:hover .v { color: var(--accent); }
 
-    /* ── Footer ── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
+      border-top: 1px solid var(--line); padding: 28px 0 96px;
+      font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
     }
-    footer span { font-size: .85rem; color: var(--muted); }
-    .footer-links { display: flex; gap: 16px; }
-    .footer-links a { font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .footer-links a:hover { color: var(--text); }
+    footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--text); }
 
-    /* ── Lang toggle ── */
-    .lang-toggle {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 3px;
-    }
-    .lang-btn {
-      font-size: .78rem;
-      font-weight: 700;
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: none;
-      background: none;
-      color: var(--muted);
-      cursor: pointer;
-      transition: .2s;
-    }
-    .lang-btn.active {
-      background: var(--blue);
-      color: #000;
-    }
+    /* ── Kaydırınca belirme ── */
+    .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); }
+    .js .reveal.in { opacity: 1; transform: none; }
+    .js .reveal[data-d="1"] { transition-delay: .08s; }
+    .js .reveal[data-d="2"] { transition-delay: .16s; }
+    .js .reveal[data-d="3"] { transition-delay: .24s; }
 
-    /* ── Reveal animation ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.show { opacity: 1; transform: translateY(0); }
+    .js .card.reveal { transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1), background .3s; }
 
-    /* ── Responsive ── */
+    /* ── Dar ekran ── */
     @media (max-width: 900px) {
-      .grid-3 { grid-template-columns: 1fr 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
+      .scene-head, .hero-foot, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .scene-head { align-items: start; gap: 12px; }
+      .actions { justify-content: flex-start; }
+      .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #orb { width: 118vw; right: -34vw; top: 34%; opacity: .6; }
     }
     @media (max-width: 640px) {
-      .grid-3, .grid-2 { grid-template-columns: 1fr; }
-      .nav-links .hide-mobile { display: none; }
-      .hero h1 { letter-spacing: -1.5px; }
-      .hero-stats { gap: 24px; }
-      footer { flex-direction: column; text-align: center; }
+      .nav a { display: none; }
+      .lang button { padding: 12px 14px; }
+      .cards { grid-template-columns: minmax(0, 1fr); }
+      .card { min-height: 0; }
+      .c-title { margin-top: 6px; }
+      dialog.panel { border-left: 0; }
+      .services { grid-template-columns: minmax(0, 1fr); }
+      .service, .service:nth-child(even) { padding-left: 0; padding-right: 0; }
+      .service:nth-child(odd) { border-right: 0; }
+      .scene-ind { display: none; }
+      .btn { padding: 13px 16px; }
+      footer { padding-bottom: 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .reveal { opacity: 1; transform: none; transition: none; }
+      .status .dot { animation: none; }
+      dialog.panel[open], dialog.panel::backdrop { animation: none; }
     }
   </style>
 </head>
 <body>
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
+  <a class="skip" href="#work" data-en="Skip to work" data-tr="İşlere geç">Skip to work</a>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <div class="wrap">
+  <header class="top" id="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#intro">Safa <i>Şentürk</i></a>
+      <nav class="nav" aria-label="Main">
+        <a href="#work" data-en="Work" data-tr="İşler">Work</a>
+        <a href="#services" data-en="Services" data-tr="Hizmetler">Services</a>
+        <a href="#stack" data-en="Stack" data-tr="Teknolojiler">Stack</a>
+        <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="tr" aria-pressed="false">TR</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-    <!-- NAV -->
-    <nav>
-      <div class="nav-inner">
-        <div class="brand">Safa<em>Şentürk</em></div>
-        <div class="nav-links">
-          <a href="#services" class="hide-mobile" data-en="Services" data-tr="Hizmetler">Services</a>
-          <a href="#projects" class="hide-mobile" data-en="Projects" data-tr="Projeler">Projects</a>
-          <a href="#skills" class="hide-mobile" data-en="Skills" data-tr="Beceriler">Skills</a>
-          <a href="#contact" class="nav-cta" data-en="Let's Talk" data-tr="İletişim">Let's Talk</a>
-          <div class="lang-toggle">
-            <button class="lang-btn active" onclick="setLang('en')">EN</button>
-            <button class="lang-btn" onclick="setLang('tr')">TR</button>
+  <div class="scene-ind" aria-hidden="true">
+    <b id="sceneNum">01</b><span class="bar"><span id="sceneBar"></span></span><span id="sceneName">Intro</span>
+  </div>
+
+  <main>
+    <!-- 01 GİRİŞ -->
+    <section class="hero" id="intro" data-scene="01" data-name-en="Intro" data-name-tr="Giriş">
+      <canvas id="orb" aria-hidden="true"></canvas>
+      <div class="wrap">
+        <div class="status">
+          <span class="dot"></span>
+          <span data-en="Available for freelance work" data-tr="Freelance çalışmaya açığım">Available for freelance work</span>
+        </div>
+        <h1>
+          <span data-en="Software that" data-tr="Gerçekten">Software that</span>
+          <span><em data-en="actually works." data-tr="çalışan yazılım.">actually works.</em></span>
+        </h1>
+        <div class="hero-foot">
+          <p data-en="I'm Safa, a software developer working across Android, web and games. I build clean, fast applications — from mobile apps to full-stack platforms and AI-powered tools." data-tr="Ben Safa. Android, web ve oyun tarafında çalışan bir yazılım geliştiricisiyim. Mobil uygulamalardan full-stack platformlara ve yapay zekâ destekli araçlara kadar temiz, hızlı uygulamalar geliştiriyorum.">I'm Safa, a software developer working across Android, web and games. I build clean, fast applications — from mobile apps to full-stack platforms and AI-powered tools.</p>
+          <div class="actions">
+            <a class="btn btn-solid" href="#work"><span data-en="View my work" data-tr="İşlerime bak">View my work</span><span class="arr" aria-hidden="true">→</span></a>
+            <a class="btn" href="#contact" data-en="Get in touch" data-tr="İletişime geç">Get in touch</a>
+            <a class="btn" href="https://github.com/SafaSenturk" target="_blank" rel="noopener"><span lang="en">GitHub</span> <span class="arr" aria-hidden="true">↗</span></a>
           </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="availability">
-        <span class="dot"></span>
-        <span data-en="Available for freelance work" data-tr="Freelance çalışmaya açığım">Available for freelance work</span>
-      </div>
-
-      <h1>
-        <span data-en="Building software" data-tr="Yazılım geliştiriyorum,">Building software</span><br />
-        <span class="line2" data-en="that actually works." data-tr="gerçekten çalışan.">that actually works.</span>
-      </h1>
-
-      <p class="hero-sub" data-en="I'm Safa, a software developer specializing in Android & Web development. I build clean, fast, and modern applications — from mobile apps to full-stack e-commerce platforms." data-tr="Merhaba, ben Safa. Android ve Web geliştirme konusunda uzmanlaşmış bir yazılım geliştiricisiyim. Mobil uygulamalardan tam kapsamlı e-ticaret platformlarına kadar modern, hızlı ve temiz uygulamalar inşa ediyorum.">
-        I'm Safa, a software developer specializing in Android & Web development.
-        I build clean, fast, and modern applications — from mobile apps to
-        full-stack e-commerce platforms.
-      </p>
-
-      <div class="hero-btns">
-        <a href="#projects" class="btn btn-blue" data-en="View My Work →" data-tr="Çalışmalarım →">
-          View My Work →
-        </a>
-        <a href="#contact" class="btn btn-ghost" data-en="Get in Touch" data-tr="İletişime Geç">
-          Get in Touch
-        </a>
-        <a href="https://github.com/SafaSenturk" target="_blank" class="btn btn-ghost">
-          GitHub ↗
-        </a>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <strong>2+</strong>
-          <span data-en="Years coding" data-tr="Yıl deneyim">Years coding</span>
-        </div>
-        <div class="stat-item">
-          <strong>3+</strong>
-          <span data-en="Projects shipped" data-tr="Tamamlanan proje">Projects shipped</span>
-        </div>
-        <div class="stat-item">
-          <strong>2</strong>
-          <span data-en="Platforms (Android + Web)" data-tr="Platform (Android + Web)">Platforms (Android + Web)</span>
-        </div>
-        <div class="stat-item">
-          <strong data-en="Fast" data-tr="Hızlı">Fast</strong>
-          <span data-en="Delivery" data-tr="Teslimat">Delivery</span>
         </div>
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="reveal">
-      <div class="section-label" data-en="What I Do" data-tr="Ne Yapıyorum">What I Do</div>
-      <h2 data-en="Services" data-tr="Hizmetler">Services</h2>
-      <p class="section-desc" data-en="I turn your ideas into real, working products — on any platform." data-tr="Fikirlerinizi gerçek, çalışan ürünlere dönüştürüyorum — her platformda.">I turn your ideas into real, working products — on any platform.</p>
-
-      <div class="grid-2">
-        <div class="service-card">
-          <div class="service-num">01</div>
+    <!-- 02 İŞLER -->
+    <section id="work" data-scene="02" data-name-en="Work" data-name-tr="İşler">
+      <div class="wrap">
+        <div class="scene-head reveal">
+          <div class="eyebrow" data-en="02 — Selected work" data-tr="02 — Seçilmiş işler">02 — Selected work</div>
           <div>
+            <h2><span data-en="Things I've" data-tr="Geliştirdiğim">Things I've</span> <em data-en="built." data-tr="işler.">built.</em></h2>
+            <p class="lead" data-en="Select a project to see the details." data-tr="Ayrıntıları görmek için bir proje seçin.">Select a project to see the details.</p>
+          </div>
+        </div>
+
+        <ul class="cards">
+          <li>
+            <button type="button" class="card reveal" data-project="whatsapp" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">01</span><span class="c-type" data-en="Web app · AI" data-tr="Web uygulaması · YZ">Web app · AI</span></span>
+              <span class="c-title" data-en="WhatsApp AI Assistant + CRM Panel" data-tr="WhatsApp AI Asistanı + CRM Paneli">WhatsApp AI Assistant + CRM Panel</span>
+              <span class="c-desc" data-en="Answers customers on WhatsApp with AI and gathers every conversation in one panel." data-tr="WhatsApp'tan yazan müşterilere yapay zekâ ile cevap verir, konuşmaları tek panelde toplar.">Answers customers on WhatsApp with AI and gathers every conversation in one panel.</span>
+              <span class="c-foot"><span class="c-tech">Next.js · Supabase · Gemini</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="card reveal" data-d="1" data-project="delamour" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">02</span><span class="c-type" data-en="Online store" data-tr="Çevrimiçi mağaza">Online store</span></span>
+              <span class="c-title">DE L'AMOUR</span>
+              <span class="c-desc" data-en="A live online store for a fragrance brand, with its own seller panel." data-tr="Bir parfüm markası için yayında olan, kendi satıcı paneline sahip çevrimiçi mağaza.">A live online store for a fragrance brand, with its own seller panel.</span>
+              <span class="c-foot"><span class="c-tech">JavaScript · Firebase</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="card reveal" data-d="2" data-project="ecommerce" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">03</span><span class="c-type" data-en="Web platform" data-tr="Web platformu">Web platform</span></span>
+              <span class="c-title" data-en="E-Commerce SaaS Platform" data-tr="E-Ticaret SaaS Platformu">E-Commerce SaaS Platform</span>
+              <span class="c-desc" data-en="A full-stack, multi-vendor e-commerce platform." data-tr="Full-stack, çok satıcılı e-ticaret platformu.">A full-stack, multi-vendor e-commerce platform.</span>
+              <span class="c-foot"><span class="c-tech">Next.js · NestJS · PostgreSQL</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="card reveal" data-project="gamedle" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">04</span><span class="c-type" data-en="Mobile game" data-tr="Mobil oyun">Mobile game</span></span>
+              <span class="c-title">Gamedle</span>
+              <span class="c-desc" data-en="An Android game app with several game modes." data-tr="Birden fazla oyun modu içeren Android oyun uygulaması.">An Android game app with several game modes.</span>
+              <span class="c-foot"><span class="c-tech">Kotlin · Jetpack Compose</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="card reveal" data-d="1" data-project="kule" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">05</span><span class="c-type" data-en="Mobile game" data-tr="Mobil oyun">Mobile game</span></span>
+              <span class="c-title">Kule Ustası</span>
+              <span class="c-desc" data-en="One-tap tower stacking game with a worldwide leaderboard." data-tr="Tek dokunuşla oynanan, dünya sıralamalı blok yığma oyunu.">One-tap tower stacking game with a worldwide leaderboard.</span>
+              <span class="c-foot"><span class="c-tech">Unity · C# · Firebase</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="card reveal" data-d="2" data-project="voleybol" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">06</span><span class="c-type" data-en="Mobile game" data-tr="Mobil oyun">Mobile game</span></span>
+              <span class="c-title">Kaos Voleybol</span>
+              <span class="c-desc" data-en="3-on-3 arcade volleyball with a career mode." data-tr="Kariyer modu olan 3'e 3 arcade voleybol oyunu.">3-on-3 arcade volleyball with a career mode.</span>
+              <span class="c-foot"><span class="c-tech">Unity · C#</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="card reveal" data-project="ccna" aria-haspopup="dialog">
+              <span class="c-top"><span class="c-num" aria-hidden="true">07</span><span class="c-type" data-en="Mobile app" data-tr="Mobil uygulama">Mobile app</span></span>
+              <span class="c-title">CCNA Cep Rehberi</span>
+              <span class="c-desc" data-en="A fully offline study companion for the CCNA exam." data-tr="CCNA sınavı için tamamen çevrimdışı çalışma uygulaması.">A fully offline study companion for the CCNA exam.</span>
+              <span class="c-foot"><span class="c-tech">Flutter · Dart</span><span class="c-more"><span data-en="Details" data-tr="Ayrıntılar">Details</span><span class="arr" aria-hidden="true">→</span></span></span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 03 HİZMETLER -->
+    <section id="services" data-scene="03" data-name-en="Services" data-name-tr="Hizmetler">
+      <div class="wrap">
+        <div class="scene-head reveal">
+          <div class="eyebrow" data-en="03 — What I do" data-tr="03 — Ne yapıyorum">03 — What I do</div>
+          <div>
+            <h2><span data-en="From idea to" data-tr="Fikirden">From idea to</span> <em data-en="working product." data-tr="çalışan ürüne.">working product.</em></h2>
+          </div>
+        </div>
+        <div class="services">
+          <div class="service reveal">
+            <span class="s-num">01</span>
             <h3 data-en="Android Development" data-tr="Android Geliştirme">Android Development</h3>
             <p data-en="Native Android apps built with Kotlin and Jetpack Compose. Clean UI, smooth performance, modern architecture." data-tr="Kotlin ve Jetpack Compose ile geliştirilen native Android uygulamaları. Temiz arayüz, akıcı performans, modern mimari.">Native Android apps built with Kotlin and Jetpack Compose. Clean UI, smooth performance, modern architecture.</p>
           </div>
-        </div>
-        <div class="service-card">
-          <div class="service-num">02</div>
-          <div>
+          <div class="service reveal" data-d="1">
+            <span class="s-num">02</span>
             <h3 data-en="Web Development" data-tr="Web Geliştirme">Web Development</h3>
-            <p data-en="Full-featured web apps with Next.js, React, and TypeScript. Responsive, fast, and production-ready." data-tr="Next.js, React ve TypeScript ile tam kapsamlı web uygulamaları. Responsive, hızlı ve production'a hazır.">Full-featured web apps with Next.js, React, and TypeScript. Responsive, fast, and production-ready.</p>
+            <p data-en="Full-featured web apps with Next.js, React and TypeScript. Responsive, fast and production-ready." data-tr="Next.js, React ve TypeScript ile tam kapsamlı web uygulamaları. Duyarlı, hızlı ve yayına hazır.">Full-featured web apps with Next.js, React and TypeScript. Responsive, fast and production-ready.</p>
           </div>
-        </div>
-        <div class="service-card">
-          <div class="service-num">03</div>
-          <div>
+          <div class="service reveal">
+            <span class="s-num">03</span>
             <h3 data-en="E-Commerce Solutions" data-tr="E-Ticaret Çözümleri">E-Commerce Solutions</h3>
-            <p data-en="Multi-vendor storefronts, product pages, carts, checkouts — everything a modern online store needs." data-tr="Çok satıcılı mağazalar, ürün sayfaları, sepet, ödeme — modern bir online mağazanın ihtiyaç duyduğu her şey.">Multi-vendor storefronts, product pages, carts, checkouts — everything a modern online store needs.</p>
+            <p data-en="Multi-vendor storefronts, product pages, carts and checkouts — everything a modern online store needs." data-tr="Çok satıcılı mağazalar, ürün sayfaları, sepet ve ödeme — modern bir çevrimiçi mağazanın ihtiyaç duyduğu her şey.">Multi-vendor storefronts, product pages, carts and checkouts — everything a modern online store needs.</p>
+          </div>
+          <div class="service reveal" data-d="1">
+            <span class="s-num">04</span>
+            <h3 data-en="AI Integrations" data-tr="Yapay Zekâ Entegrasyonları">AI Integrations</h3>
+            <p data-en="Assistants and automations that plug language models into real workflows — messaging, support and internal tools." data-tr="Dil modellerini gerçek iş akışlarına bağlayan asistanlar ve otomasyonlar — mesajlaşma, destek ve iç araçlar.">Assistants and automations that plug language models into real workflows — messaging, support and internal tools.</p>
           </div>
         </div>
-        <div class="service-card">
-          <div class="service-num">04</div>
+      </div>
+    </section>
+
+    <!-- 04 TEKNOLOJİLER -->
+    <section id="stack" data-scene="04" data-name-en="Stack" data-name-tr="Teknolojiler">
+      <div class="wrap">
+        <div class="scene-head reveal">
+          <div class="eyebrow" data-en="04 — Stack" data-tr="04 — Teknolojiler">04 — Stack</div>
           <div>
-            <h3 data-en="UI / UX Design" data-tr="UI / UX Tasarım">UI / UX Design</h3>
-            <p data-en="Clean, intuitive interfaces designed with real users in mind. From wireframes to pixel-perfect implementation." data-tr="Gerçek kullanıcılar düşünülerek tasarlanmış temiz, sezgisel arayüzler. Wireframe'den piksel mükemmelliğine.">Clean, intuitive interfaces designed with real users in mind. From wireframes to pixel-perfect implementation.</p>
+            <h2><span data-en="Tools I" data-tr="Düzenli">Tools I</span> <em data-en="work with." data-tr="kullandıklarım.">work with.</em></h2>
+          </div>
+        </div>
+        <div class="stack">
+          <div class="reveal">
+            <h3 data-en="Mobile" data-tr="Mobil">Mobile</h3>
+            <ul><li>Kotlin</li><li>Jetpack Compose</li><li>Android SDK</li><li>Flutter</li></ul>
+          </div>
+          <div class="reveal" data-d="1">
+            <h3 lang="en">Web</h3>
+            <ul><li>Next.js</li><li>React</li><li>TypeScript</li><li>Tailwind CSS</li></ul>
+          </div>
+          <div class="reveal" data-d="2">
+            <h3 data-en="Backend" data-tr="Arka uç">Backend</h3>
+            <ul><li>NestJS</li><li>PostgreSQL</li><li>Supabase</li><li>Python</li></ul>
+          </div>
+          <div class="reveal" data-d="3">
+            <h3 data-en="Games &amp; tools" data-tr="Oyun ve araçlar">Games &amp; tools</h3>
+            <ul><li>Unity</li><li>C#</li><li>Git &amp; GitHub</li><li>Docker</li></ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="reveal">
-      <div class="section-label" data-en="Portfolio" data-tr="Portföy">Portfolio</div>
-      <h2 data-en="Featured Projects" data-tr="Öne Çıkan Projeler">Featured Projects</h2>
-      <p class="section-desc" data-en="A selection of things I've built recently." data-tr="Son zamanlarda geliştirdiğim projelerden bir seçki.">A selection of things I've built recently.</p>
+    <!-- 05 İLETİŞİM -->
+    <section class="contact" id="contact" data-scene="05" data-name-en="Contact" data-name-tr="İletişim">
+      <div class="wrap">
+        <div class="eyebrow reveal" data-en="05 — Contact" data-tr="05 — İletişim">05 — Contact</div>
+        <h2 class="reveal" data-d="1" style="margin-top:18px"><span data-en="Let's work" data-tr="Birlikte">Let's work</span> <em data-en="together." data-tr="çalışalım.">together.</em></h2>
 
-      <div class="grid-3">
-        <div class="card">
-          <div class="card-icon">🛒</div>
-          <h3 data-en="E-Commerce SaaS Platform" data-tr="E-Ticaret SaaS Platformu">E-Commerce SaaS Platform</h3>
-          <p data-en="Full-stack multi-vendor e-commerce SaaS with JWT auth, REST API, and real-time product/order management. Frontend on Vercel, backend on Railway, database on Neon PostgreSQL." data-tr="JWT kimlik doğrulama, REST API ve gerçek zamanlı ürün/sipariş yönetimi içeren full-stack çok satıcılı e-ticaret SaaS platformu. Frontend Vercel'de, backend Railway'de, veritabanı Neon PostgreSQL'de.">Full-stack multi-vendor e-commerce SaaS with JWT auth, REST API, and real-time product/order management. Frontend on Vercel, backend on Railway, database on Neon PostgreSQL.</p>
-          <div class="project-tags">
-            <span class="tag tag-blue">Next.js 15</span>
-            <span class="tag tag-purple">NestJS</span>
-            <span class="tag tag-blue">PostgreSQL</span>
-            <span class="tag tag-purple">TypeScript</span>
-            <span class="tag tag-green">Live</span>
-          </div>
-          <a href="https://ecommerce-saas-coral.vercel.app" target="_blank" class="card-link" data-en="View Demo →" data-tr="Demoya Git →">View Demo →</a>
-        </div>
+        <div class="contact-grid">
+          <form class="reveal" action="https://formspree.io/f/xeebvaep" method="POST">
+            <div>
+              <label for="f-name" data-en="Your name" data-tr="Adınız">Your name</label>
+              <input id="f-name" type="text" name="name" autocomplete="name" required placeholder="John Doe" data-ph-en="John Doe" data-ph-tr="Ad Soyad" />
+            </div>
+            <div>
+              <label for="f-email" lang="en">Email</label>
+              <input id="f-email" type="email" name="email" autocomplete="email" required placeholder="john@example.com" />
+            </div>
+            <div>
+              <label for="f-msg" data-en="Message" data-tr="Mesaj">Message</label>
+              <textarea id="f-msg" name="message" required placeholder="Tell me about your project…" data-ph-en="Tell me about your project…" data-ph-tr="Projenizden bahsedin…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-solid"><span data-en="Send message" data-tr="Mesaj gönder">Send message</span><span class="arr" aria-hidden="true">→</span></button>
+          </form>
 
-        <div class="card">
-          <div class="card-icon">🎮</div>
-          <h3 data-en="Gamedle" data-tr="Gamedle">Gamedle</h3>
-          <p data-en="A mobile game application developed with Kotlin and Jetpack Compose featuring multiple interactive game modes." data-tr="Kotlin ve Jetpack Compose ile geliştirilen, birden fazla interaktif oyun modu içeren mobil oyun uygulaması.">A mobile game application developed with Kotlin and Jetpack Compose featuring multiple interactive game modes.</p>
-          <div class="project-tags">
-            <span class="tag tag-blue">Kotlin</span>
-            <span class="tag tag-purple">Jetpack Compose</span>
-            <span class="tag tag-blue">Android</span>
-          </div>
-          <a href="https://github.com/SafaSenturk/gamedle" target="_blank" class="card-link" data-en="View on GitHub →" data-tr="GitHub'da Gör →">View on GitHub →</a>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">📱</div>
-          <h3 data-en="More Coming Soon" data-tr="Yakında Daha Fazlası">More Coming Soon</h3>
-          <p data-en="Currently working on new mobile and web projects. Open to freelance work — let's build something together." data-tr="Yeni mobil ve web projeleri üzerinde çalışıyorum. Freelance çalışmaya açığım — birlikte bir şeyler inşa edelim.">Currently working on new mobile and web projects. Open to freelance work — let's build something together.</p>
-          <div class="project-tags">
-            <span class="tag">Android</span>
-            <span class="tag">React Native</span>
-            <span class="tag" data-en="In Progress" data-tr="Devam Ediyor">In Progress</span>
-          </div>
-          <a href="https://github.com/SafaSenturk" target="_blank" class="card-link" data-en="Follow on GitHub →" data-tr="GitHub'da Takip Et →">Follow on GitHub →</a>
+          <ul class="channels reveal" data-d="1">
+            <li><a href="mailto:safasenturk00@gmail.com"><span class="k" lang="en">Email</span><span class="v">safasenturk00@gmail.com</span></a></li>
+            <li><a href="https://www.linkedin.com/in/safa-senturk" target="_blank" rel="noopener"><span class="k" lang="en">LinkedIn</span><span class="v">safa-senturk</span></a></li>
+            <li><a href="https://github.com/SafaSenturk" target="_blank" rel="noopener"><span class="k" lang="en">GitHub</span><span class="v">SafaSenturk</span></a></li>
+            <li><div class="static"><span class="k" data-en="Location" data-tr="Konum">Location</span><span class="v">Trabzon, Türkiye</span></div></li>
+          </ul>
         </div>
       </div>
     </section>
+  </main>
 
-    <!-- SKILLS -->
-    <section id="skills" class="reveal">
-      <div class="section-label" data-en="Tech Stack" data-tr="Teknolojiler">Tech Stack</div>
-      <h2 data-en="Skills" data-tr="Beceriler">Skills</h2>
-      <p class="section-desc" data-en="Technologies I work with regularly." data-tr="Düzenli olarak çalıştığım teknolojiler.">Technologies I work with regularly.</p>
-
-      <div class="skills-grid">
-        <div class="skill-category" data-en="Mobile" data-tr="Mobil">Mobile</div>
-        <div class="skill">Kotlin</div>
-        <div class="skill">Jetpack Compose</div>
-        <div class="skill">Android SDK</div>
-        <div class="skill">Android Studio</div>
-
-        <div class="skill-category">Web</div>
-        <div class="skill">Next.js</div>
-        <div class="skill">React</div>
-        <div class="skill">TypeScript</div>
-        <div class="skill">TailwindCSS</div>
-        <div class="skill">Framer Motion</div>
-
-        <div class="skill-category" data-en="Backend & Tools" data-tr="Backend & Araçlar">Backend & Tools</div>
-        <div class="skill">Python</div>
-        <div class="skill">Java</div>
-        <div class="skill">Git</div>
-        <div class="skill">GitHub</div>
-        <div class="skill">Vercel</div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="reveal">
-      <div class="section-label" data-en="Contact" data-tr="İletişim">Contact</div>
-      <h2 data-en="Let's work together." data-tr="Birlikte çalışalım.">Let's work together.</h2>
-      <p class="section-desc" data-en="Have a project in mind? I'd love to hear about it." data-tr="Aklınızda bir proje mi var? Dinlemeyi çok isterim.">Have a project in mind? I'd love to hear about it.</p>
-
-      <div class="contact-grid">
-        <form class="contact-form" action="https://formspree.io/f/xeebvaep" method="POST">
-          <div class="form-group">
-            <label data-en="Your Name" data-tr="Adınız">Your Name</label>
-            <input type="text" name="name" data-placeholder-en="John Doe" data-placeholder-tr="Ad Soyad" placeholder="John Doe" required />
+  <dialog class="panel" id="panel">
+    <div class="panel-bar">
+      <span class="eyebrow" id="panelCount">01 / 07</span>
+      <button type="button" class="panel-close" id="panelClose"><span data-en="Close" data-tr="Kapat">Close</span><span aria-hidden="true">✕</span></button>
+    </div>
+    <div class="panel-body" id="panelBody">
+        <article class="detail" data-project="whatsapp" hidden>
+          <p class="eyebrow" data-en="Web app · AI" data-tr="Web uygulaması · YZ">Web app · AI</p>
+          <h3 id="dt-whatsapp" data-en="WhatsApp AI Assistant + CRM Panel" data-tr="WhatsApp AI Asistanı + CRM Paneli">WhatsApp AI Assistant + CRM Panel</h3>
+          <p data-en="An assistant that answers customer messages on WhatsApp with AI and gathers every conversation in one web panel. The business owner sets the tone and the business details from the panel, and can step into any conversation." data-tr="WhatsApp'tan yazan müşterilere yapay zekâ ile cevap veren ve tüm konuşmaları tek bir web panelinde toplayan asistan. İşletme sahibi üslubu ve işletme bilgilerini panelden belirler, istediği konuşmaya kendisi de girebilir.">An assistant that answers customer messages on WhatsApp with AI and gathers every conversation in one web panel. The business owner sets the tone and the business details from the panel, and can step into any conversation.</p>
+          <p data-en="When the assistant doesn't know the answer, it hands the conversation over to a person and stays quiet. The message flow is covered by an end-to-end integration test that mocks the WhatsApp provider." data-tr="Asistan cevabını bilmediği soruda konuşmayı bir insana devreder ve susar. Mesaj akışı, WhatsApp sağlayıcısını taklit eden uçtan uca bir entegrasyon testiyle doğrulanır.">When the assistant doesn't know the answer, it hands the conversation over to a person and stays quiet. The message flow is covered by an end-to-end integration test that mocks the WhatsApp provider.</p>
+          <figure class="shot">
+            <img src="assets/whatsapp-konusma.jpg" width="800" height="720" loading="lazy" alt="Conversation screen: the bot answers questions about opening hours, prices and shipping." data-alt-en="Conversation screen: the bot answers questions about opening hours, prices and shipping." data-alt-tr="Konuşma ekranı: bot çalışma saatleri, fiyat ve kargo sorularını cevaplıyor." />
+            <figcaption data-en="Conversation view — sample data" data-tr="Konuşma ekranı — örnek veri">Conversation view — sample data</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/whatsapp-gelen-kutusu.jpg" width="800" height="720" loading="lazy" alt="Inbox screen listing four contacts with their status labels." data-alt-en="Inbox screen listing four contacts with their status labels." data-alt-tr="Gelen kutusu ekranı: dört kişi ve durum etiketleri." />
+            <figcaption data-en="Inbox — sample data" data-tr="Gelen kutusu — örnek veri">Inbox — sample data</figcaption>
+          </figure>
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Web app + bot" data-tr="Web uygulaması + bot">Web app + bot</dd>
+              <dt data-en="Frontend" data-tr="Arayüz">Frontend</dt><dd>Next.js 16 · React 19</dd>
+              <dt data-en="Database" data-tr="Veritabanı">Database</dt><dd>Supabase (Postgres)</dd>
+              <dt data-en="AI" data-tr="Yapay zekâ">AI</dt><dd>Gemini API</dd>
+              <dt data-en="Messaging" data-tr="Mesajlaşma">Messaging</dt><dd>Evolution API · Docker</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>Next.js 16</li><li>TypeScript</li><li>Supabase</li><li>Gemini API</li><li>Evolution API</li><li>Docker</li></ul>
+          <a class="link" href="https://github.com/SafaSenturk/whatsapp-ai-asistan" target="_blank" rel="noopener"><span data-en="View on GitHub" data-tr="Kaynak koda bak">View on GitHub</span><span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="detail" data-project="delamour" hidden>
+          <p class="eyebrow" data-en="Online store" data-tr="Çevrimiçi mağaza">Online store</p>
+          <h3 id="dt-delamour">DE L'AMOUR</h3>
+          <p data-en="A live online store for a laundry fragrance brand, built so the brand can sell directly instead of through a marketplace. Customers browse the catalogue, order as a guest or a member, and follow their order with a tracking number." data-tr="Bir çamaşır parfümü markası için yayında olan çevrimiçi mağaza; markanın pazaryeri yerine doğrudan satış yapabilmesi için geliştirildi. Müşteriler kataloğu gezer, misafir ya da üye olarak sipariş verir ve siparişini takip numarasıyla izler.">A live online store for a laundry fragrance brand, built so the brand can sell directly instead of through a marketplace. Customers browse the catalogue, order as a guest or a member, and follow their order with a tracking number.</p>
+          <p data-en="The seller panel covers products, stock, categories, orders and shipping, with separate roles for the owner and for sellers. Access is enforced by database security rules, which are covered by automated tests together with the storefront flows." data-tr="Satıcı paneli ürün, stok, kategori, sipariş ve kargo yönetimini kapsar; mağaza sahibi ve satıcılar için ayrı roller vardır. Erişim veritabanı güvenlik kurallarıyla sınırlanır; bu kurallar ve mağaza akışları otomatik testlerle doğrulanır.">The seller panel covers products, stock, categories, orders and shipping, with separate roles for the owner and for sellers. Access is enforced by database security rules, which are covered by automated tests together with the storefront flows.</p>
+          <figure class="shot">
+            <img src="assets/delamour-anasayfa.jpg" width="1200" height="750" loading="lazy" alt="Home page of the store: headline, call-to-action buttons and the navigation bar with cart." data-alt-en="Home page of the store: headline, call-to-action buttons and the navigation bar with cart." data-alt-tr="Mağazanın ana sayfası: başlık, eylem düğmeleri ve sepetli gezinme çubuğu." />
+            <figcaption data-en="Home page" data-tr="Ana sayfa">Home page</figcaption>
+          </figure>
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Online store + seller panel" data-tr="Çevrimiçi mağaza + satıcı paneli">Online store + seller panel</dd>
+              <dt data-en="Frontend" data-tr="Arayüz">Frontend</dt><dd data-en="JavaScript, no framework" data-tr="JavaScript, çatısız">JavaScript, no framework</dd>
+              <dt data-en="Database" data-tr="Veritabanı">Database</dt><dd>Cloud Firestore</dd>
+              <dt data-en="Accounts" data-tr="Hesaplar">Accounts</dt><dd>Firebase Authentication</dd>
+              <dt data-en="Hosting" data-tr="Yayın">Hosting</dt><dd>Firebase Hosting</dd>
+              <dt data-en="Languages" data-tr="Diller">Languages</dt><dd data-en="Turkish · English" data-tr="Türkçe · İngilizce">Turkish · English</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>JavaScript</li><li>Firebase</li><li>Firestore</li><li>Security Rules</li></ul>
+          <a class="link" href="https://delamour-vitrin.web.app" target="_blank" rel="noopener"><span data-en="Visit the live site" data-tr="Canlı siteyi aç">Visit the live site</span><span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="detail" data-project="ecommerce" hidden>
+          <p class="eyebrow" data-en="Web platform" data-tr="Web platformu">Web platform</p>
+          <h3 id="dt-ecommerce" data-en="E-Commerce SaaS Platform" data-tr="E-Ticaret SaaS Platformu">E-Commerce SaaS Platform</h3>
+          <p data-en="A full-stack, multi-vendor e-commerce platform with JWT authentication, a REST API, and product and order management." data-tr="JWT kimlik doğrulama, REST API ve ürün/sipariş yönetimi içeren full-stack, çok satıcılı e-ticaret platformu.">A full-stack, multi-vendor e-commerce platform with JWT authentication, a REST API, and product and order management.</p>
+          <p data-en="The frontend, the API and the database are deployed as separate services." data-tr="Arayüz, API ve veritabanı ayrı servisler olarak yayınlanır.">The frontend, the API and the database are deployed as separate services.</p>
+          <figure class="shot">
+            <img src="assets/ecommerce-anasayfa.jpg" width="760" height="598" loading="lazy" alt="Hero section of the platform's home page with headline, two buttons and summary figures." data-alt-en="Hero section of the platform's home page with headline, two buttons and summary figures." data-alt-tr="Platformun ana sayfasının giriş bölümü: başlık, iki düğme ve özet rakamlar." />
+            <figcaption data-en="Home page — hero section" data-tr="Ana sayfa — giriş bölümü">Home page — hero section</figcaption>
+          </figure>
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Web platform" data-tr="Web platformu">Web platform</dd>
+              <dt data-en="Frontend" data-tr="Arayüz">Frontend</dt><dd>Next.js 15 · Vercel</dd>
+              <dt data-en="Backend" data-tr="Arka uç">Backend</dt><dd>NestJS · REST</dd>
+              <dt data-en="Database" data-tr="Veritabanı">Database</dt><dd>PostgreSQL</dd>
+              <dt data-en="Auth" data-tr="Kimlik">Auth</dt><dd>JWT</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>Next.js 15</li><li>NestJS</li><li>PostgreSQL</li><li>TypeScript</li><li>Vercel</li></ul>
+          <a class="link" href="https://ecommerce-saas-coral.vercel.app" target="_blank" rel="noopener"><span data-en="Open the demo" data-tr="Demoyu aç">Open the demo</span><span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="detail" data-project="gamedle" hidden>
+          <p class="eyebrow" data-en="Mobile game" data-tr="Mobil oyun">Mobile game</p>
+          <h3 id="dt-gamedle">Gamedle</h3>
+          <p data-en="An Android game app built with Kotlin and Jetpack Compose, with several interactive game modes in a single app." data-tr="Kotlin ve Jetpack Compose ile geliştirilen, tek uygulamada birden fazla etkileşimli oyun modu sunan Android oyun uygulaması.">An Android game app built with Kotlin and Jetpack Compose, with several interactive game modes in a single app.</p>
+          <div class="shots-pair">
+            <figure class="shot">
+              <img src="assets/gamedle-menu.jpg" width="357" height="800" loading="lazy" alt="Main menu of the app with two category buttons." data-alt-en="Main menu of the app with two category buttons." data-alt-tr="Uygulamanın ana menüsü: iki kategori düğmesi." />
+              <figcaption data-en="Main menu" data-tr="Ana menü">Main menu</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/gamedle-oyun.jpg" width="355" height="797" loading="lazy" alt="Guessing screen: an input field and a row of colour-coded hints for the last guess." data-alt-en="Guessing screen: an input field and a row of colour-coded hints for the last guess." data-alt-tr="Tahmin ekranı: giriş alanı ve son tahmin için renk kodlu ipuçları satırı." />
+              <figcaption data-en="Guessing screen" data-tr="Tahmin ekranı">Guessing screen</figcaption>
+            </figure>
           </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="email" placeholder="john@example.com" required />
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Mobile game" data-tr="Mobil oyun">Mobile game</dd>
+              <dt>Platform</dt><dd>Android</dd>
+              <dt data-en="Language" data-tr="Dil">Language</dt><dd>Kotlin</dd>
+              <dt data-en="UI" data-tr="Arayüz">UI</dt><dd>Jetpack Compose</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>Kotlin</li><li>Jetpack Compose</li><li>Android</li></ul>
+          <a class="link" href="https://github.com/SafaSenturk/gamedle" target="_blank" rel="noopener"><span data-en="View on GitHub" data-tr="Kaynak koda bak">View on GitHub</span><span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="detail" data-project="kule" hidden>
+          <p class="eyebrow" data-en="Mobile game" data-tr="Mobil oyun">Mobile game</p>
+          <h3 id="dt-kule">Kule Ustası</h3>
+          <p data-en="A one-tap, portrait tower stacking game for Android. Every block counts as three metres, and the tower is measured against real structures as it grows." data-tr="Android için tek dokunuşla oynanan, dikey bir blok yığma oyunu. Her blok üç metre sayılır ve kule yükseldikçe gerçek yapılarla karşılaştırılır.">A one-tap, portrait tower stacking game for Android. Every block counts as three metres, and the tower is measured against real structures as it grows.</p>
+          <p data-en="Scores are kept on a worldwide leaderboard. Sounds and graphics are generated in code, without ready-made assets." data-tr="Skorlar dünya sıralamasında tutulur. Sesler ve görseller hazır varlık kullanılmadan kodla üretilir.">Scores are kept on a worldwide leaderboard. Sounds and graphics are generated in code, without ready-made assets.</p>
+          <div class="shots-pair">
+            <figure class="shot">
+              <img src="assets/kule-oynanis.jpg" width="540" height="959" loading="lazy" alt="Gameplay: a block sliding over the tower, with the score, combo counter and height map." data-alt-en="Gameplay: a block sliding over the tower, with the score, combo counter and height map." data-alt-tr="Oynanış: kulenin üzerinde kayan blok, puan, kombo sayacı ve yükseklik haritası." />
+              <figcaption data-en="Gameplay" data-tr="Oynanış">Gameplay</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/kule-yapilar.jpg" width="540" height="959" loading="lazy" alt="Structures page listing real landmarks unlocked by tower height." data-alt-en="Structures page listing real landmarks unlocked by tower height." data-alt-tr="Kule yüksekliğiyle açılan gerçek yapıları listeleyen Yapılar sayfası." />
+              <figcaption data-en="Structures unlocked by height" data-tr="Yükseklikle açılan yapılar">Structures unlocked by height</figcaption>
+            </figure>
           </div>
-          <div class="form-group">
-            <label data-en="Message" data-tr="Mesaj">Message</label>
-            <textarea name="message" data-placeholder-en="Tell me about your project..." data-placeholder-tr="Projeniz hakkında bilgi verin..." placeholder="Tell me about your project..."></textarea>
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Mobile game" data-tr="Mobil oyun">Mobile game</dd>
+              <dt>Platform</dt><dd>Android</dd>
+              <dt data-en="Engine" data-tr="Motor">Engine</dt><dd>Unity 6</dd>
+              <dt data-en="Language" data-tr="Dil">Language</dt><dd>C#</dd>
+              <dt data-en="Leaderboard" data-tr="Sıralama">Leaderboard</dt><dd>Firebase</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>Unity</li><li>C#</li><li>Firebase</li></ul>
+        </article>
+        <article class="detail" data-project="voleybol" hidden>
+          <p class="eyebrow" data-en="Mobile game" data-tr="Mobil oyun">Mobile game</p>
+          <h3 id="dt-voleybol">Kaos Voleybol</h3>
+          <p data-en="A 3-on-3 arcade volleyball game for Android. A chaos meter fills during the match and triggers events such as low gravity or wind." data-tr="Android için 3'e 3 arcade voleybol oyunu. Maç sırasında dolan kaos metresi düşük yerçekimi ya da rüzgâr gibi olayları tetikler.">A 3-on-3 arcade volleyball game for Android. A chaos meter fills during the match and triggers events such as low gravity or wind.</p>
+          <p data-en="It includes a career mode, a cup, guided training and two-player matches over a local network. The physics is written by hand." data-tr="Kariyer modu, kupa, rehberli antrenman ve yerel ağ üzerinden iki kişilik maç içerir. Fizik elle yazılmıştır.">It includes a career mode, a cup, guided training and two-player matches over a local network. The physics is written by hand.</p>
+          <figure class="shot">
+            <img src="assets/voleybol-oynanis.jpg" width="1200" height="675" loading="lazy" alt="A 3-on-3 match on an outdoor court with the scoreboard and a signature move banner." data-alt-en="A 3-on-3 match on an outdoor court with the scoreboard and a signature move banner." data-alt-tr="Açık sahada 3'e 3 maç: skor tabelası ve imza hamlesi bildirimi." />
+            <figcaption data-en="Match — signature move" data-tr="Maç — imza hamlesi">Match — signature move</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="assets/voleybol-kariyer.jpg" width="1200" height="675" loading="lazy" alt="Career mode squad screen with the player list and one player's attributes." data-alt-en="Career mode squad screen with the player list and one player's attributes." data-alt-tr="Kariyer modu kadro ekranı: oyuncu listesi ve bir oyuncunun özellikleri." />
+            <figcaption data-en="Career mode — squad" data-tr="Kariyer modu — kadro">Career mode — squad</figcaption>
+          </figure>
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Mobile game" data-tr="Mobil oyun">Mobile game</dd>
+              <dt>Platform</dt><dd>Android</dd>
+              <dt data-en="Engine" data-tr="Motor">Engine</dt><dd>Unity 6</dd>
+              <dt data-en="Language" data-tr="Dil">Language</dt><dd>C#</dd>
+              <dt data-en="Multiplayer" data-tr="Çok oyunculu">Multiplayer</dt><dd data-en="Local network" data-tr="Yerel ağ">Local network</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>Unity</li><li>C#</li></ul>
+        </article>
+        <article class="detail" data-project="ccna" hidden>
+          <p class="eyebrow" data-en="Mobile app" data-tr="Mobil uygulama">Mobile app</p>
+          <h3 id="dt-ccna">CCNA Cep Rehberi</h3>
+          <p data-en="A study app for people preparing for the CCNA exam, with topic modules, a glossary and practice questions." data-tr="CCNA sınavına hazırlananlar için konu modülleri, sözlük ve alıştırma soruları içeren çalışma uygulaması.">A study app for people preparing for the CCNA exam, with topic modules, a glossary and practice questions.</p>
+          <p data-en="It works fully offline: it asks for no internet permission and collects no data." data-tr="Tamamen çevrimdışı çalışır: internet izni istemez ve veri toplamaz.">It works fully offline: it asks for no internet permission and collects no data.</p>
+          <div class="shots-pair">
+            <figure class="shot">
+              <img src="assets/ccna-anasayfa.jpg" width="540" height="1200" loading="lazy" alt="Home screen with the daily goal, quick-start tiles and the term of the day." data-alt-en="Home screen with the daily goal, quick-start tiles and the term of the day." data-alt-tr="Ana ekran: günlük hedef, hızlı başlangıç kutuları ve günün terimi." />
+              <figcaption data-en="Home screen" data-tr="Ana ekran">Home screen</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="assets/ccna-soru.jpg" width="540" height="1200" loading="lazy" alt="A practice question with four options, showing the correct answer and an explanation." data-alt-en="A practice question with four options, showing the correct answer and an explanation." data-alt-tr="Dört seçenekli bir alıştırma sorusu: doğru cevap ve açıklaması gösteriliyor." />
+              <figcaption data-en="Practice question" data-tr="Alıştırma sorusu">Practice question</figcaption>
+            </figure>
           </div>
-          <button type="submit" class="btn btn-blue" style="align-self:flex-start" data-en="Send Message →" data-tr="Mesaj Gönder →">
-            Send Message →
-          </button>
-        </form>
+          <figure class="spec">
+            <dl>
+              <dt data-en="Type" data-tr="Tür">Type</dt><dd data-en="Mobile app" data-tr="Mobil uygulama">Mobile app</dd>
+              <dt>Platform</dt><dd>Android</dd>
+              <dt data-en="Framework" data-tr="Çatı">Framework</dt><dd>Flutter</dd>
+              <dt data-en="Language" data-tr="Dil">Language</dt><dd>Dart</dd>
+              <dt data-en="State" data-tr="Durum yönetimi">State</dt><dd>Riverpod</dd>
+            </dl>
+          </figure>
+          <ul class="chips" aria-label="Stack"><li>Flutter</li><li>Dart</li><li>Riverpod</li></ul>
+        </article>
+    </div>
+  </dialog>
 
-        <div class="contact-info">
-          <a href="mailto:safasenturk00@gmail.com" class="contact-item">
-            <div class="contact-item-icon">✉</div>
-            <div>
-              <div class="contact-item-label">Email</div>
-              <div class="contact-item-value">safasenturk00@gmail.com</div>
-            </div>
-          </a>
-          <a href="https://www.linkedin.com/in/safa-senturk" target="_blank" class="contact-item">
-            <div class="contact-item-icon">in</div>
-            <div>
-              <div class="contact-item-label">LinkedIn</div>
-              <div class="contact-item-value">safa-senturk</div>
-            </div>
-          </a>
-          <a href="https://github.com/SafaSenturk" target="_blank" class="contact-item">
-            <div class="contact-item-icon">⌥</div>
-            <div>
-              <div class="contact-item-label">GitHub</div>
-              <div class="contact-item-value">SafaSenturk</div>
-            </div>
-          </a>
-          <div class="contact-item" style="cursor:default">
-            <div class="contact-item-icon">📍</div>
-            <div>
-              <div class="contact-item-label" data-en="Location" data-tr="Konum">Location</div>
-              <div class="contact-item-value">Trabzon, Türkiye</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer>
+  <footer>
+    <div class="wrap">
       <span>© 2026 Safa Şentürk</span>
-      <div class="footer-links">
-        <a href="https://github.com/SafaSenturk" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/safa-senturk" target="_blank">LinkedIn</a>
-        <a href="mailto:safasenturk00@gmail.com">Email</a>
-      </div>
-    </footer>
-
-  </div>
+      <a href="#intro" data-en="Back to top ↑" data-tr="Başa dön ↑">Back to top ↑</a>
+    </div>
+  </footer>
 
   <script>
-    // Reveal on scroll
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => io.observe(el));
+    (function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Lang switch
-    let currentLang = 'en';
-
-    function setLang(lang) {
-      currentLang = lang;
-
-      // Toggle active button
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+      /* ── Dil ── */
+      function setLang(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll("[data-en]").forEach(function (el) {
+          el.textContent = el.getAttribute("data-" + lang);
+        });
+        document.querySelectorAll("[data-ph-en]").forEach(function (el) {
+          el.placeholder = el.getAttribute("data-ph-" + lang);
+        });
+        document.querySelectorAll("[data-alt-en]").forEach(function (el) {
+          el.alt = el.getAttribute("data-alt-" + lang);
+        });
+        document.querySelectorAll(".lang button").forEach(function (b) {
+          b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+        });
+        currentLang = lang;
+        updateSceneName();
+        try { localStorage.setItem("lang", lang); } catch (e) {}
+      }
+      var currentLang = "en";
+      var saved = null;
+      try { saved = localStorage.getItem("lang"); } catch (e) {}
+      document.querySelectorAll(".lang button").forEach(function (b) {
+        b.addEventListener("click", function () { setLang(b.dataset.lang); });
       });
 
-      // Update all elements with data-en / data-tr
-      document.querySelectorAll('[data-en]').forEach(el => {
-        el.textContent = el.getAttribute('data-' + lang);
-      });
+      /* ── Sahne göstergesi ── */
+      var scenes = Array.prototype.slice.call(document.querySelectorAll("section[data-scene]"));
+      var sceneNum = document.getElementById("sceneNum");
+      var sceneName = document.getElementById("sceneName");
+      var sceneBar = document.getElementById("sceneBar");
+      var activeScene = scenes[0];
+      function updateSceneName() {
+        if (!activeScene) return;
+        sceneNum.textContent = activeScene.dataset.scene;
+        sceneName.textContent = activeScene.getAttribute("data-name-" + currentLang);
+        sceneBar.style.transform = "scaleX(" + (scenes.indexOf(activeScene) + 1) / scenes.length + ")";
+      }
 
-      // Update placeholders
-      document.querySelectorAll('[data-placeholder-en]').forEach(el => {
-        el.placeholder = el.getAttribute('data-placeholder-' + lang);
-      });
-    }
+      if (saved === "tr" || (!saved && (navigator.language || "").toLowerCase().indexOf("tr") === 0)) setLang("tr");
+      else updateSceneName();
 
-    // Form
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      const msg = currentLang === 'tr' ? 'Mesaj Gönderildi ✓' : 'Message Sent ✓';
-      const orig = btn.getAttribute('data-' + currentLang);
-      btn.textContent = msg;
-      btn.style.background = "#3fb950";
-      setTimeout(() => {
-        btn.textContent = orig;
-        btn.style.background = "";
-        e.target.reset();
-      }, 3000);
-    }
+      /* ── Belirme ── */
+      // Kaydırma konumuna bağlıdır (aşağıdaki onScroll içinde); gözlemciye bağlı olmadığı için
+      // hızlı kaydırmada ya da bağlantıyla atlamada içerik görünmez kalmaz.
+      var pending = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+      if (reduce) { pending.forEach(function (el) { el.classList.add("in"); }); pending = []; }
+
+      /* ── Kaydırmaya bağlı öğeler ── */
+      var progress = document.getElementById("progress");
+      var top = document.getElementById("top");
+      var parallax = Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));
+      var heroEl = document.getElementById("intro");
+      var scrollY = 0, heroProgress = 0, ticking = false;
+
+      function onScroll() {
+        scrollY = window.scrollY || window.pageYOffset;
+        var vh = window.innerHeight;
+        var max = document.documentElement.scrollHeight - vh;
+        progress.style.transform = "scaleX(" + (max > 0 ? Math.min(1, scrollY / max) : 0) + ")";
+        top.classList.toggle("scrolled", scrollY > 24);
+        heroProgress = Math.min(1, Math.max(0, scrollY / Math.max(1, heroEl.offsetHeight)));
+
+        var mid = vh * 0.45, best = activeScene;
+        for (var i = 0; i < scenes.length; i++) {
+          var r = scenes[i].getBoundingClientRect();
+          if (r.top <= mid && r.bottom > mid) { best = scenes[i]; break; }
+        }
+        // Son sahne kısa olduğunda orta çizgiye hiç ulaşmaz; sayfa sonunda onu seç.
+        if (max > 0 && scrollY >= max - 4) best = scenes[scenes.length - 1];
+        if (best !== activeScene) { activeScene = best; updateSceneName(); }
+
+        for (var k = pending.length - 1; k >= 0; k--) {
+          if (pending[k].getBoundingClientRect().top < vh * 0.94) {
+            pending[k].classList.add("in");
+            pending.splice(k, 1);
+          }
+        }
+
+        if (!reduce) {
+          for (var j = 0; j < parallax.length; j++) {
+            var pr = parallax[j].getBoundingClientRect();
+            if (pr.bottom < -100 || pr.top > vh + 100) continue;
+            var off = (pr.top + pr.height / 2 - vh / 2) / vh;
+            parallax[j].style.transform = "translate3d(0," + (off * -16).toFixed(1) + "px,0)";
+          }
+        }
+        ticking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+      }, { passive: true });
+      window.addEventListener("resize", onScroll);
+      onScroll();
+
+      /* ── Proje ayrıntı paneli ── */
+      var panel = document.getElementById("panel");
+      var panelBody = document.getElementById("panelBody");
+      var panelCount = document.getElementById("panelCount");
+      var details = Array.prototype.slice.call(panel.querySelectorAll(".detail"));
+      function openProject(id) {
+        details.forEach(function (d, i) {
+          var on = d.dataset.project === id;
+          d.hidden = !on;
+          if (on) {
+            panel.setAttribute("aria-labelledby", "dt-" + id);
+            panelCount.textContent = ("0" + (i + 1)).slice(-2) + " / " + ("0" + details.length).slice(-2);
+          }
+        });
+        if (typeof panel.showModal === "function") { if (!panel.open) panel.showModal(); }
+        else panel.setAttribute("open", "");
+        panelBody.scrollTop = 0;
+        document.documentElement.classList.add("locked");
+      }
+      function unlock() {
+        if (!panel.open) document.documentElement.classList.remove("locked");
+      }
+      function closePanel() {
+        if (typeof panel.close === "function") panel.close(); else panel.removeAttribute("open");
+        unlock();
+      }
+      document.querySelectorAll(".card").forEach(function (card) {
+        card.addEventListener("click", function () { openProject(card.dataset.project); });
+      });
+      document.getElementById("panelClose").addEventListener("click", closePanel);
+      panel.addEventListener("click", function (e) { if (e.target === panel) closePanel(); });   // panelin dışına tıklama
+      panel.addEventListener("close", unlock);   // Esc ile kapanma; panel yeniden açıldıysa kilide dokunmaz
+
+      /* ── Giriş sahnesi: elle çizilen 3B tel kafes ── */
+      var cv = document.getElementById("orb");
+      var ctx = cv.getContext && cv.getContext("2d");
+      if (!ctx) return;
+
+      var SEG = 96, rings = [];
+      function ring(tiltX, tiltZ, radius, yOff, accent) {
+        var pts = [];
+        for (var i = 0; i <= SEG; i++) {
+          var a = (i / SEG) * Math.PI * 2;
+          var x = Math.cos(a) * radius, y = yOff, z = Math.sin(a) * radius;
+          var y1 = y * Math.cos(tiltX) - z * Math.sin(tiltX), z1 = y * Math.sin(tiltX) + z * Math.cos(tiltX);
+          var x2 = x * Math.cos(tiltZ) - y1 * Math.sin(tiltZ), y2 = x * Math.sin(tiltZ) + y1 * Math.cos(tiltZ);
+          pts.push([x2, y2, z1]);
+        }
+        rings.push({ pts: pts, accent: !!accent });
+      }
+      // Küre enlemleri
+      for (var k = -3; k <= 3; k++) {
+        var lat = (k / 4) * (Math.PI / 2);
+        ring(0, 0, Math.cos(lat), Math.sin(lat), false);
+      }
+      // Boylamlar
+      for (var m = 0; m < 6; m++) ring(Math.PI / 2, 0, 1, 0, false), rotateLast((m / 6) * Math.PI);
+      // Dış yörünge halkaları (biri vurgu renginde)
+      ring(1.05, 0.35, 1.34, 0, true);
+      ring(-0.6, -0.5, 1.55, 0, false);
+
+      function rotateLast(ay) {
+        var p = rings[rings.length - 1].pts, c = Math.cos(ay), s = Math.sin(ay);
+        for (var i = 0; i < p.length; i++) {
+          var x = p[i][0], z = p[i][2];
+          p[i][0] = x * c + z * s; p[i][2] = -x * s + z * c;
+        }
+      }
+
+      var size = 0, dpr = 1, px = 0, py = 0, tx = 0, ty = 0, visible = true, running = false, t0 = performance.now();
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        size = cv.clientWidth;
+        cv.width = cv.height = Math.round(size * dpr);
+      }
+      function draw(now) {
+        var t = (now - t0) / 1000;
+        px += (tx - px) * 0.05; py += (ty - py) * 0.05;
+        var ay = t * 0.12 + heroProgress * 2.6 + px * 0.5;
+        var ax = 0.38 + heroProgress * 0.9 + py * 0.35;
+        var cy = Math.cos(ay), sy = Math.sin(ay), cx = Math.cos(ax), sx = Math.sin(ax);
+        var w = cv.width, R = w * 0.27 * (1 + heroProgress * 0.35), F = 3.4;
+
+        ctx.clearRect(0, 0, w, w);
+        ctx.lineWidth = Math.max(1, dpr * 0.9);
+        ctx.globalAlpha = 1 - heroProgress * 0.85;
+
+        for (var r = 0; r < rings.length; r++) {
+          var ringDef = rings[r], pts = ringDef.pts;
+          var prevX = 0, prevY = 0, prevZ = 0;
+          for (var i = 0; i < pts.length; i++) {
+            var p = pts[i];
+            var x = p[0] * cy + p[2] * sy, z = -p[0] * sy + p[2] * cy;
+            var y = p[1] * cx - z * sx; z = p[1] * sx + z * cx;
+            var sc = F / (F + z);
+            var X = w / 2 + x * R * sc, Y = w / 2 + y * R * sc;
+            if (i > 0) {
+              var depth = 1 - ((prevZ + z) / 2 + 1.6) / 3.2;      // öndekiler daha belirgin
+              var a = Math.max(0.05, Math.min(1, depth));
+              ctx.strokeStyle = ringDef.accent
+                ? "rgba(201,138,75," + (0.25 + a * 0.75).toFixed(3) + ")"
+                : "rgba(235,230,218," + (0.04 + a * 0.3).toFixed(3) + ")";
+              ctx.beginPath(); ctx.moveTo(prevX, prevY); ctx.lineTo(X, Y); ctx.stroke();
+            }
+            prevX = X; prevY = Y; prevZ = z;
+          }
+        }
+        if (running) requestAnimationFrame(draw);
+      }
+      function setRunning(on) {
+        on = on && !reduce;
+        if (on && !running) { running = true; requestAnimationFrame(draw); }
+        else if (!on) running = false;
+      }
+
+      resize();
+      window.addEventListener("resize", function () { resize(); if (!running) draw(performance.now()); });
+      window.addEventListener("pointermove", function (e) {
+        tx = e.clientX / window.innerWidth - 0.5;
+        ty = e.clientY / window.innerHeight - 0.5;
+      }, { passive: true });
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          visible = entries[0].isIntersecting;
+          setRunning(visible && !document.hidden);
+        }).observe(heroEl);
+      }
+      document.addEventListener("visibilitychange", function () { setRunning(visible && !document.hidden); });
+      draw(performance.now());
+      setRunning(true);
+    })();
   </script>
 </body>
 </html>
